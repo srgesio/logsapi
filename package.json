@@ -1,0 +1,23 @@
+{
+  "name": "logsapi",
+  "version": "1.0.0",
+  "description": "API to wrapping a list of notes, events or tasks.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "class-validator": "^0.14.1",
+    "graphql": "^16.8.2",
+    "reflect-metadata": "^0.2.2",
+    "type-graphql": "^2.0.0-rc.1"
+  }
+}
