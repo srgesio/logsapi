@@ -4,12 +4,12 @@ import { Field, ID, InputType } from "type-graphql";
 export class UpdateLogInput {
     @Field(() => ID)
     id: string
-    @Field({ nullable: true })
+    @Field(() => String, { nullable: true })
     message: string
-    @Field({ nullable: true })
+    @Field(() => String, { nullable: true })
     type: "task" | "event" | "note"
     @Field(() => [String], { nullable: true })
     notes: string[]
-    @Field({ defaultValue: "todo" })
+    @Field(() => String, { defaultValue: "todo" })
     status: "todo" | "partialDone" | "done" | "closed" | "impediment"
 }
