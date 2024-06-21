@@ -1,4 +1,4 @@
-import { Arg, Args, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { database } from "../database";
 import { randomUUID } from "node:crypto"
 import { AddLogInput } from "../dtos/inputs/AddLogInput";
@@ -14,14 +14,14 @@ export class LogsResolver {
     }
 
     @Query(() => Log)
-    async log(@Arg('data') { id }: LogInput) {
-        return database.logs.find(log => log.id === id)
+    async log(@Arg('getdata', () => LogInput) data: LogInput) {
+        return database.logs.find(log => log.id === data.id)
     }
 
     @Mutation(() => Log)
-    async addLog(@Arg('data') data: AddLogInput) {
+    async addLog(@Arg('adddata', () => AddLogInput) data: AddLogInput) {
 
-        const log = {
+        const log: Log = {
             id: randomUUID(),
             ...data
         }
@@ -30,14 +30,14 @@ export class LogsResolver {
     }
 
     @Mutation(() => Log)
-    async updateLog(@Arg('data') data: UpdateLogInput) {
+    async updateLog(@Arg('updatedata', () => UpdateLogInput) data: UpdateLogInput) {
         const logToUpdateIndex = database.logs.findIndex(log => log.id === data.id)
         const logToUpdate = database.logs[logToUpdateIndex]
         if (!logToUpdate) {
             throw new Error('Log not found')
         }
 
-        const log = {
+        const log: Log = {
             ...logToUpdate,
             ...data
         }
@@ -51,7 +51,7 @@ export class LogsResolver {
     }
 
     @Mutation(() => Boolean)
-    async deleteLog(@Arg('data') { id }: LogInput) {
+    async deleteLog(@Arg('deletedata', () => LogInput) { id }: LogInput) {
         const logToDeleteIndex = database.logs.findIndex(log => log.id === id)
         if (logToDeleteIndex === -1) {
             throw new Error('Log not found')

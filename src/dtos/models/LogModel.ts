@@ -2,14 +2,14 @@ import { Field, ID, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class Log {
-    @Field(() => ID)
+    @Field(type => ID)
     id: string
-    @Field(() => String)
+    @Field(type => String)
     message: string
-    @Field(() => String)
+    @Field(type => String)
     type: "task" | "event" | "note"
-    @Field(() => [String], { nullable: true })
+    @Field(type => [String], { nullable: true })
     notes: string[]
-    @Field(() => String)
+    @Field(type => String)
     status: "todo" | "partialDone" | "done" | "closed" | "impediment"
 }
