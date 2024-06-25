@@ -43,7 +43,7 @@ export class LogsResolver {
         }
 
         if (data.notes && logToUpdate.notes) {
-            log.notes = [...data.notes, ...logToUpdate.notes]
+            log.notes = [...data.notes]
         }
 
         database.logs[logToUpdateIndex] = log
