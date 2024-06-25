@@ -52,11 +52,7 @@ export class LogsResolver {
 
     @Mutation(() => Boolean)
     async deleteLog(@Arg('deletedata', () => LogInput) { id }: LogInput) {
-        const logToDeleteIndex = database.logs.findIndex(log => log.id === id)
-        if (logToDeleteIndex === -1) {
-            throw new Error('Log not found')
-        }
-        database.logs.splice(logToDeleteIndex, 1)
+        database.logs = database.logs.filter(log => log.id !== id)
         return true
     }
 }
