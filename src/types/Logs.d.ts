@@ -1,8 +1,8 @@
-interface Database {
-    logs: Log[]
+export type Database = {
+    logs: Omit<Log, "id">[]
 }
 
-interface Log {
+export type Log = {
     id: string
     message: string
     type: "task" | "event" | "note"
