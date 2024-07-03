@@ -35,19 +35,16 @@ export class LogsResolver {
     @Mutation(() => Log)
     async updateLog(@Arg('updatedata', () => UpdateLogInput) data: UpdateLogInput) {
 
-        const log: UpdateLogInput = {
-            ...data
-        }
-        const logWithoutId: AddLogInput = {
-            message: log.message,
-            type: log.type,
-            notes: log.notes,
-            status: log.status
-        }
         return await prisma.log.update({
-            where: { id: log.id },
-            data: logWithoutId
-        })
+            where: { id: data.id },
+            data: {
+                message: data.message,
+                type: data.type,
+                notes: data.notes,
+                status: data.status
+            }
+        }
+        )
     }
 
     @Mutation(() => Boolean)
