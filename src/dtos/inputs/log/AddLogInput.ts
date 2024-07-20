@@ -1,15 +1,15 @@
-import { Field, ID, InputType } from "type-graphql";
+import { Field, InputType } from "type-graphql";
 
 @InputType()
-export class UpdateLogInput {
-    @Field(() => ID)
-    id: string
-    @Field(() => String, { nullable: true })
+export class AddLogInput {
+    @Field(() => String)
     message: string
-    @Field(() => String, { nullable: true })
+    @Field(() => String, { defaultValue: "task" })
     type: "task" | "event" | "note"
     @Field(() => [String], { nullable: true })
     notes: string[]
     @Field(() => String, { defaultValue: "todo" })
     status: "todo" | "partialDone" | "done" | "closed" | "impediment"
+    @Field(() => String)
+    collectionId: string
 }

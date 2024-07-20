@@ -12,4 +12,6 @@ export class Log {
     notes: string[]
     @Field(type => String)
     status: "todo" | "partialDone" | "done" | "closed" | "impediment"
+    @Field(type => String)
+    collectionId: string
 }

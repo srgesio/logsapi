@@ -8,13 +8,25 @@ datasource db {
 }
 
 model Log {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
+  message      String
+  status       String
+  type         String
+  notes        String[]
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String     @db.ObjectId
+
+  @@map("logs")
+}
+
+model Collection {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-  message   String
-  status    String
-  type      String
-  notes     String[]
+  name      String
+  logs      Log[]
 
-  @@map("logs")
+  @@map("collections")
 }

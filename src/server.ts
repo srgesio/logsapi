@@ -2,10 +2,11 @@ import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 import { LogsResolver } from './resolvers/LogsResolver'
+import { CollectionsResolver } from './resolvers/CollectionResolver'
 
 async function main() {
     const schema = await buildSchema({
-        resolvers: [LogsResolver]
+        resolvers: [LogsResolver, CollectionsResolver]
     })
 
     const server = new ApolloServer({

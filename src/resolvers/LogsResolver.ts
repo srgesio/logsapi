@@ -1,8 +1,8 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { AddLogInput } from "../dtos/inputs/AddLogInput";
+import { AddLogInput } from "../dtos/inputs/log/AddLogInput";
 import { Log } from "../dtos/models/LogModel";
-import { LogInput } from "../dtos/inputs/logInput";
-import { UpdateLogInput } from "../dtos/inputs/UpdateLogInput";
+import { LogInput } from "../dtos/inputs/log/logInput";
+import { UpdateLogInput } from "../dtos/inputs/log/UpdateLogInput";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
@@ -28,7 +28,13 @@ export class LogsResolver {
             ...data
         }
         return await prisma.log.create({
-            data: log
+            data: {
+                message: data.message,
+                type: data.type,
+                notes: data.notes,
+                status: data.status,
+                collectionId: data.collectionId
+            }
         })
     }
 
@@ -41,7 +47,8 @@ export class LogsResolver {
                 message: data.message,
                 type: data.type,
                 notes: data.notes,
-                status: data.status
+                status: data.status,
+                collectionId: data.collectionId
             }
         }
         )
